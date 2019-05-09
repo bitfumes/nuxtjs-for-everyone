@@ -4,12 +4,13 @@
     <nuxt-link to="/">Home</nuxt-link>
     <!-- <n-link to="/">Home</n-link>
     <NuxtLink to="/">Home</NuxtLink>
-    <NLink to="/">Home</NLink> -->
+    <NLink to="/">Home</NLink>-->
   </div>
 </template>
 
 <script>
 export default {
+  middleware: 'test',
   asyncData() {
     return { title: 'About' }
   },
