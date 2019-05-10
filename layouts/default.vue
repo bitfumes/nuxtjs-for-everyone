@@ -1,25 +1,22 @@
 <template>
   <v-app>
     <v-content>
-      <v-toolbar>
-        <v-toolbar-side-icon></v-toolbar-side-icon>
-        <v-toolbar-title>Learning Nuxt</v-toolbar-title>
+      <v-toolbar color="indigo" dark>
+        <v-toolbar-title>
+          <n-link to="/">Learning Nuxt</n-link>
+        </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn flat>
-            <n-link to="/">Home</n-link>
-          </v-btn>
-          <v-btn flat>
-            <n-link to="/about">About</n-link>
-          </v-btn>
-          <v-btn flat>
-            <n-link to="/inspire">Inspire</n-link>
-          </v-btn>
-        </v-toolbar-items>
+        <v-btn flat>
+          <v-toolbar-items class="hidden-sm-and-down">
+            <n-link to="/weather-app">Weather App</n-link>
+          </v-toolbar-items>
+        </v-btn>
       </v-toolbar>
-      <transition>
-        <nuxt />
-      </transition>
+      <nuxt />
+      <v-footer class="pa-3" fixed color="teal" dark>
+        <v-spacer></v-spacer>
+        <div>&copy; {{ new Date().getFullYear() }}</div>
+      </v-footer>
     </v-content>
   </v-app>
 </template>
@@ -28,4 +25,9 @@
 export default {}
 </script>
 
-<style></style>
+<style>
+a {
+  text-decoration: none;
+  color: white;
+}
+</style>
