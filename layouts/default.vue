@@ -19,6 +19,11 @@
             <n-link to="/quiz-app">Quiz App</n-link>
           </v-toolbar-items>
         </v-btn>
+        <v-btn v-if="$auth()" flat @click="logout">
+          <v-toolbar-items class="hidden-sm-and-down">
+            Logout
+          </v-toolbar-items>
+        </v-btn>
       </v-toolbar>
       <nuxt />
       <v-footer class="pa-3 mt-4" fixed color="teal" dark>
@@ -30,7 +35,14 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    logout() {
+      this.$cookies.remove('token')
+      this.$router.push('/admin/login')
+    }
+  }
+}
 </script>
 
 <style>

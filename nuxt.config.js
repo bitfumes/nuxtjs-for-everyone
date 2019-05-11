@@ -37,7 +37,11 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify', '@/plugins/notify.client.js'],
+  plugins: [
+    '@/plugins/vuetify',
+    '@/plugins/notify.client.js',
+    '@/plugins/ability'
+  ],
 
   /*
    ** Nuxt.js modules
@@ -45,8 +49,10 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    'cookie-universal-nuxt'
   ],
+
   /*
    ** Axios module configuration
    */
