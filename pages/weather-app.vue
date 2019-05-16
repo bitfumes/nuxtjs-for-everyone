@@ -8,14 +8,41 @@
       </v-card>
     </v-flex>
     <v-flex xs12 class="mt-4">
-      <v-text-field label="Enter City Name" solo></v-text-field>
+      <v-form @submit.prevent="getWeatherInfo">
+        <v-text-field
+          v-model="city"
+          label="Enter City Name"
+          solo
+        ></v-text-field>
+      </v-form>
     </v-flex>
     <!-- </v-layout> -->
   </v-container>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      city: 'London',
+      weather: {}
+    }
+  },
+  created() {
+    this.getWeatherInfo()
+  },
+  methods: {
+    getWeatherInfo() {
+      this.$axios
+        .$get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${
+            this.city
+          }&appid=ddb956415e4c89646c1fe66f214ec94a`
+        )
+        .then(res => (this.weather = res))
+    }
+  }
+}
 </script>
 
 <style></style>
