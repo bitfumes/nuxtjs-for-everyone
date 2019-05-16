@@ -12,9 +12,7 @@
         </v-toolbar-items>
       </v-toolbar>
       <transition>
-        <v-content>
-          <nuxt />
-        </v-content>
+        <nuxt />
       </transition>
     </v-content>
   </v-app>
