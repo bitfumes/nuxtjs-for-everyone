@@ -3,7 +3,9 @@
     <v-content>
       <v-toolbar color="indigo" dark>
         <v-toolbar-side-icon></v-toolbar-side-icon>
-        <v-toolbar-title>Learning Nuxt</v-toolbar-title>
+        <v-toolbar-title>
+          <n-link to="/">Learning Nuxt</n-link>
+        </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn flat>

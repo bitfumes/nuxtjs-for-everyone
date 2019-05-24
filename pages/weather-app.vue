@@ -12,9 +12,9 @@
               <img :src="icon" alt="weather icon" />
               <p>
                 <span class="display-1">{{ temp() }} &deg;C</span>
-                <span class="caption ml-4">
-                  {{ weather.weather[0].description }}
-                </span>
+                <span class="caption ml-4">{{
+                  weather.weather[0].description
+                }}</span>
               </p>
             </v-flex>
             <v-flex v-if="weather.weather" xs4 class="text-xs-center">
@@ -23,9 +23,9 @@
               <img :src="icon" alt="weather icon" />
               <p>
                 <span class="display-1">{{ temp() }} &deg;C</span>
-                <span class="caption ml-4">
-                  {{ weather.weather[0].description }}
-                </span>
+                <span class="caption ml-4">{{
+                  weather.weather[0].description
+                }}</span>
               </p>
             </v-flex>
             <v-flex v-if="weather.weather" xs4 class="text-xs-center">
@@ -34,9 +34,9 @@
               <img :src="icon" alt="weather icon" />
               <p>
                 <span class="display-1">{{ temp() }} &deg;C</span>
-                <span class="caption ml-4">
-                  {{ weather.weather[0].description }}
-                </span>
+                <span class="caption ml-4">{{
+                  weather.weather[0].description
+                }}</span>
               </p>
             </v-flex>
           </v-layout>
@@ -60,8 +60,7 @@
 export default {
   data() {
     return {
-      city: 'London',
-      weather: {}
+      city: 'London'
     }
   },
   computed: {
@@ -71,8 +70,14 @@ export default {
         : ''
     }
   },
-  created() {
-    this.getWeatherInfo()
+  asyncData({ params, $axios }) {
+    return $axios
+      .$get(
+        `https://api.openweathermap.org/data/2.5/weather?q=London&appid=ddb956415e4c89646c1fe66f214ec94a`
+      )
+      .then(res => {
+        return { weather: res }
+      })
   },
   methods: {
     getWeatherInfo() {
