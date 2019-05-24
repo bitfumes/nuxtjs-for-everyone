@@ -73,7 +73,9 @@ export default {
   asyncData({ params, $axios }) {
     return $axios
       .$get(
-        `https://api.openweathermap.org/data/2.5/weather?q=London&appid=ddb956415e4c89646c1fe66f214ec94a`
+        `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${
+          process.env.weatherAppId
+        }`
       )
       .then(res => {
         return { weather: res }
@@ -85,7 +87,7 @@ export default {
         .$get(
           `https://api.openweathermap.org/data/2.5/weather?q=${
             this.city
-          }&appid=ddb956415e4c89646c1fe66f214ec94a`
+          }&appid=${process.env.weatherAppId}`
         )
         .then(res => (this.weather = res))
     },
