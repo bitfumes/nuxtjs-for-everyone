@@ -1,12 +1,11 @@
 <template>
   <v-container>
-    <!-- <v-layout> -->
     <h1 class="display-1 text-xs-center">Weather App</h1>
     <v-flex xs12>
       <v-card color="blue-grey darken-2" dark>
         <v-card-text>
           <v-layout justify-center>
-            <v-flex v-if="weather.weather" xs4 class="text-xs-center">
+            <v-flex xs4 class="text-xs-center">
               <h4>Temperature</h4>
               <h1 class="display-1">{{ weather.name }}</h1>
               <img :src="icon" alt="weather icon" />
@@ -17,7 +16,7 @@
                 }}</span>
               </p>
             </v-flex>
-            <v-flex v-if="weather.weather" xs4 class="text-xs-center">
+            <v-flex xs4 class="text-xs-center">
               <h4>Wind & Pressure:</h4>
               <h3 class="headline">
                 Wind: {{ weather.wind.speed }} m/s ({{ weather.wind.deg }}
@@ -30,7 +29,7 @@
                 Pressure: {{ weather.main.pressure }} hPa
               </h3>
             </v-flex>
-            <v-flex v-if="weather.weather" xs4 class="text-xs-center">
+            <v-flex xs4 class="text-xs-center">
               <h4>Other:</h4>
               <h3 class="headline mt-4">
                 Max Temperature:
@@ -54,7 +53,6 @@
         ></v-text-field>
       </v-form>
     </v-flex>
-    <!-- </v-layout> -->
   </v-container>
 </template>
 
@@ -92,7 +90,7 @@ export default {
         .then(res => (this.weather = res))
     },
     temp() {
-      return this.weather.main ? Math.round(this.weather.main.temp - 273) : ''
+      return Math.round(this.weather.main.temp - 273)
     }
   }
 }
