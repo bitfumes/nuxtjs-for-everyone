@@ -57,39 +57,30 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  data() {
-    return {
-      city: 'London'
-    }
-  },
   computed: {
+    ...mapState('weather', ['weather']),
+    city: {
+      get() {
+        return this.$store.state.weather.city
+      },
+      set(value) {
+        this.$store.commit('weather/setCity', value)
+      }
+    },
     icon() {
       return this.weather.weather
         ? `https://openweathermap.org/img/w/${this.weather.weather[0].icon}.png`
         : ''
     }
   },
-  asyncData({ params, $axios }) {
-    return $axios
-      .$get(
-        `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${
-          process.env.weatherAppId
-        }`
-      )
-      .then(res => {
-        return { weather: res }
-      })
+  fetch({ store, $axios }) {
+    return store.dispatch('weather/getWeatherInfo')
   },
   methods: {
     getWeatherInfo() {
-      this.$axios
-        .$get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${
-            this.city
-          }&appid=${process.env.weatherAppId}`
-        )
-        .then(res => (this.weather = res))
+      this.$store.dispatch('weather/getWeatherInfo')
     },
     temp() {
       return Math.round(this.weather.main.temp - 273)
