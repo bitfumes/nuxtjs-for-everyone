@@ -11,6 +11,9 @@
           <v-btn flat>
             <n-link to="/weather-app">Weather App</n-link>
           </v-btn>
+          <v-btn flat>
+            <n-link to="/quiz">Quiz App</n-link>
+          </v-btn>
         </v-toolbar-items>
       </v-toolbar>
       <transition>
