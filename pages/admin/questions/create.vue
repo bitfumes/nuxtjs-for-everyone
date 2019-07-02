@@ -93,7 +93,6 @@ export default {
       this.$axios
         .post(`https://nuxt-quiz.firebaseio.com/quiz/questions.json`, this.quiz)
         .then(res => {
-          console.log(res.data)
           this.storeAnswer(res.data.name)
         })
         .catch(err => {
@@ -107,7 +106,7 @@ export default {
           answer: this.correct
         })
         .then(result => {
-          console.log(result)
+          this.$router.push('/admin/questions')
         })
         .catch(err => {
           console.log(err.response.data)

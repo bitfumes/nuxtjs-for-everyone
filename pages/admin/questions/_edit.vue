@@ -85,11 +85,13 @@ export default {
         option3: '',
         option4: ''
       },
-      correct: ''
+      correct: '',
+      answer_id: ''
     }
   },
   created() {
     this.get()
+    this.getAnswer()
   },
   methods: {
     get() {
@@ -110,6 +112,31 @@ export default {
             this.$route.params.edit
           }.json`,
           this.quiz
+        )
+        .then(res => this.updateAnswer())
+    },
+    getAnswer() {
+      this.$axios
+        .$get(
+          `https://nuxt-quiz.firebaseio.com/quiz/answers.json?orderBy="question_id"&startAt="${
+            this.$route.params.edit
+          }"&endAt="${this.$route.params.edit}"`
+        )
+        .then(res => {
+          this.correct = Object.values(res)[0].answer
+          this.answer_id = Object.keys(res)[0]
+        })
+    },
+    updateAnswer() {
+      this.$axios
+        .patch(
+          `https://nuxt-quiz.firebaseio.com/quiz/answers/${
+            this.answer_id
+          }.json`,
+          {
+            question_id: this.$route.params.edit,
+            answer: this.correct
+          }
         )
         .then(res => this.$router.push('/admin/questions'))
     }
