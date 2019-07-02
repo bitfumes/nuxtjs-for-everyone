@@ -24,7 +24,9 @@
                 <td class="text-xs-left">{{ props.item.option4 }}</td>
                 <td class="text-xs-center">
                   <v-icon small>delete</v-icon>
-                  <v-icon small color="orange">edit</v-icon>
+                  <n-link :to="`/admin/questions/${props.item.id}`">
+                    <v-icon small color="orange">edit</v-icon>
+                  </n-link>
                 </td>
               </template>
             </v-data-table>
