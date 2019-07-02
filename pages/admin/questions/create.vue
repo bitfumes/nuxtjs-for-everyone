@@ -91,7 +91,7 @@ export default {
   methods: {
     store() {
       this.$axios
-        .post(`https://nuxt-quiz.firebaseio.com/quiz/questions.json`, this.quiz)
+        .post(`/questions.json`, this.quiz)
         .then(res => {
           this.storeAnswer(res.data.name)
         })
@@ -101,7 +101,7 @@ export default {
     },
     storeAnswer(id) {
       this.$axios
-        .post(`https://nuxt-quiz.firebaseio.com/quiz/answers.json`, {
+        .post(`/answers.json`, {
           question_id: id,
           answer: this.correct
         })

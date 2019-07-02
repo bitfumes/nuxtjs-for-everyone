@@ -23,7 +23,7 @@
                 <td class="text-xs-left">{{ props.item.option3 }}</td>
                 <td class="text-xs-left">{{ props.item.option4 }}</td>
                 <td class="text-xs-center">
-                  <v-icon small>delete</v-icon>
+                  <v-icon small @click="destroy(props.item.id)">delete</v-icon>
                   <n-link :to="`/admin/questions/${props.item.id}`">
                     <v-icon small color="orange">edit</v-icon>
                   </n-link>
@@ -57,15 +57,30 @@ export default {
   },
   methods: {
     fetchQuestions() {
+      this.$axios.get(`/questions.json`).then(
+        res =>
+          (this.questions = Object.keys(res.data).map((key, index) => {
+            res.data[key].id = key
+            return res.data[key]
+          }))
+      )
+    },
+    destroy(key) {
+      this.$axios.delete(`/questions/${key}.json`).then(res => {
+        this.fetchAnswer(key)
+      })
+    },
+    fetchAnswer(key) {
       this.$axios
-        .get(`https://nuxt-quiz.firebaseio.com/quiz/questions.json`)
-        .then(
-          res =>
-            (this.questions = Object.keys(res.data).map((key, index) => {
-              res.data[key].id = key
-              return res.data[key]
-            }))
+        .get(
+          `/answers.json?orderBy="question_id"&startAt="${key}"&endAt="${key}"`
         )
+        .then(res => this.destroyAnswer(key, Object.keys(res.data)[0]))
+    },
+    destroyAnswer(key, answerId) {
+      this.$axios
+        .delete(`/answers/${answerId}.json`)
+        .then(res => this.questions.splice(this.questions[key]))
     }
   }
 }

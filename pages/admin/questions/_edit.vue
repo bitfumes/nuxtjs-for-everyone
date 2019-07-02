@@ -96,10 +96,7 @@ export default {
   methods: {
     get() {
       this.$axios
-        .get(
-          `https://nuxt-quiz.firebaseio.com/quiz/questions.json`,
-          this.$route.params.edit
-        )
+        .get(`/questions.json`, this.$route.params.edit)
         .then(res => (this.quiz = res.data[this.$route.params.edit]))
         .catch(err => {
           console.log(err.response.data)
@@ -107,18 +104,13 @@ export default {
     },
     update() {
       this.$axios
-        .$patch(
-          `https://nuxt-quiz.firebaseio.com/quiz/questions/${
-            this.$route.params.edit
-          }.json`,
-          this.quiz
-        )
+        .$patch(`/questions/${this.$route.params.edit}.json`, this.quiz)
         .then(res => this.updateAnswer())
     },
     getAnswer() {
       this.$axios
         .$get(
-          `https://nuxt-quiz.firebaseio.com/quiz/answers.json?orderBy="question_id"&startAt="${
+          `/answers.json?orderBy="question_id"&startAt="${
             this.$route.params.edit
           }"&endAt="${this.$route.params.edit}"`
         )
@@ -129,15 +121,10 @@ export default {
     },
     updateAnswer() {
       this.$axios
-        .patch(
-          `https://nuxt-quiz.firebaseio.com/quiz/answers/${
-            this.answer_id
-          }.json`,
-          {
-            question_id: this.$route.params.edit,
-            answer: this.correct
-          }
-        )
+        .patch(`/answers/${this.answer_id}.json`, {
+          question_id: this.$route.params.edit,
+          answer: this.correct
+        })
         .then(res => this.$router.push('/admin/questions'))
     }
   }
