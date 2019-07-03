@@ -8,25 +8,25 @@
         <v-radio-group v-model="choosen" row style="display:block">
           <v-radio
             :label="item.option1"
-            color="green"
+            :color="answerColor()"
             :value="item.option1"
           ></v-radio>
           <v-spacer></v-spacer>
           <v-radio
             :label="item.option2"
-            color="green"
+            :color="answerColor()"
             :value="item.option2"
           ></v-radio>
           <v-spacer></v-spacer>
           <v-radio
             :label="item.option3"
-            color="green"
+            :color="answerColor()"
             :value="item.option3"
           ></v-radio>
           <v-spacer></v-spacer>
           <v-radio
             :label="item.option4"
-            color="green"
+            :color="answerColor()"
             :value="item.option4"
           ></v-radio>
         </v-radio-group>
@@ -72,6 +72,19 @@ export default {
     },
     verifyAnswer(answer) {
       this.result = answer === this.choosen
+      if (this.result) {
+        this.$notify({
+          group: 'notify',
+          title: 'success',
+          text: 'Yeahh Correct Answer'
+        })
+      }
+    },
+    answerColor() {
+      if (this.result === null) {
+        return 'black'
+      }
+      return this.result ? 'green' : 'red'
     }
   }
 }
