@@ -14,6 +14,9 @@
           <v-btn flat>
             <n-link to="/quiz">Quiz App</n-link>
           </v-btn>
+          <v-btn v-if="$auth()" flat @click="logout">
+            Logout
+          </v-btn>
         </v-toolbar-items>
       </v-toolbar>
       <transition>
@@ -24,7 +27,15 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    logout() {
+      this.$cookies.remove('token')
+      this.$store.commit('auth/setLoggedIn', false)
+      this.$router.push('/admin/login')
+    }
+  }
+}
 </script>
 
 <style>
